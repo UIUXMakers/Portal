@@ -324,125 +324,8 @@
 
     /* 3D Tilt */
     .service-block.tilt-3d { perspective: 800px; }
-  </style>
-</head>
-<body>
-  <div class="orb one"></div>
-  <div class="orb two blue"></div>
 
-  <main class="page-container" role="main" aria-label="UI/UX Makers Landing Page">
-    <!-- Hero Section -->
-    <div class="hero-wrapper fade-in delay-1">
-      <section class="hero-block" tabindex="0" aria-labelledby="hero-title">
-        <video autoplay muted loop playsinline style="max-width: 100%; height: auto; max-height: 280px; border-radius: 20px; object-fit: contain;">
-          <source src="logo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <p>A royal elegant digital agency inspired by Japanese artistry and cinematic calm.</p>
-      </section>
-    </div>
-
-    <!-- Services -->
-    <div class="services-wrapper">
-      <section class="service-block color1 fade-in delay-2 tilt-3d" tabindex="0" aria-label="Creative Design">
-        <div class="service-block-inner">
-          <div class="icon-container" aria-hidden="true">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M12 19l7-7 3 3-7 7-7-7 3-3 7-7" />
-            </svg>
-          </div>
-          <h3>Creative Design</h3>
-          <p>Innovative concepts blending traditional Japanese minimalism with modern aesthetics.</p>
-          <a href="/creative-design" tabindex="0">Learn More</a>
-          <span class="tooltip" role="tooltip">Explore our creative design portfolio & unique projects.</span>
-        </div>
-      </section>
-
-      <section class="service-block color2 fade-in delay-3 tilt-3d" tabindex="0" aria-label="Precision Engineering">
-        <div class="service-block-inner">
-          <div class="icon-container" aria-hidden="true">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-            </svg>
-          </div>
-          <h3>Precision Engineering</h3>
-          <p>High-quality digital craftsmanship ensuring flawless performance and user experience.</p>
-          <a href="/precision-engineering" tabindex="0">Learn More</a>
-          <span class="tooltip" role="tooltip">Discover how precision elevates our projects to excellence.</span>
-        </div>
-      </section>
-
-      <section class="service-block color3 fade-in delay-4 tilt-3d" tabindex="0" aria-label="Strategic Consulting">
-        <div class="service-block-inner">
-          <div class="icon-container" aria-hidden="true">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M3 3h18v18H3z" />
-              <path d="M12 8v8" />
-              <path d="M8 12h8" />
-            </svg>
-          </div>
-          <h3>Strategic Consulting</h3>
-          <p>Better strategies focused on growth, sustainability, and impactful results.</p>
-          <a href="/strategic-consulting" tabindex="0">Learn More</a>
-          <span class="tooltip" role="tooltip">Get expert advice customized for your business goals.</span>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- 3D Tilt Script -->
-  <script>
-    document.querySelectorAll('.service-block.tilt-3d').forEach(block => {
-      const inner = block.querySelector('.service-block-inner');
-      const maxTilt = 15;
-
-      function handleMove(e) {
-        const rect = block.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const deltaX = (x - centerX) / centerX;
-        const deltaY = (y - centerY) / centerY;
-        const rotateX = maxTilt * deltaY * -1;
-        const rotateY = maxTilt * deltaX;
-        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-      }
-
-      function resetTilt() {
-        inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
-      }
-
-      block.addEventListener('mousemove', handleMove);
-      block.addEventListener('mouseleave', resetTilt);
-      block.addEventListener('mouseenter', () => {
-        inner.style.transition = 'transform 0.1s ease-out';
-      });
-    });
-  </script>
-
-  <!-- Chatbot -->
-  <div id="chatbot-container" aria-label="Chatbot" role="region" aria-live="polite">
-    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-window" aria-label="Open chatbot">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
-      </svg>
-    </button>
-    <div id="chatbot-window" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
-      <header>
-        <h2>Chatbot</h2>
-        <button id="chatbot-close" aria-label="Close chatbot">×</button>
-      </header>
-      <div class="chatbot-content">
-        <p>Hello! How can we assist you today?</p>
-        <input type="text" placeholder="Type your message..." aria-label="Chat message input" disabled />
-        <button disabled>Send</button>
-      </div>
-    </div>
-  </div>
-
-  <style>
+    /* === Dynamic Chatbot Styles === */
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 6px 2px rgba(65, 105, 225, 0.6), 0 0 15px 5px rgba(65, 105, 225, 0.4); transform: scale(1); }
       50% { box-shadow: 0 0 12px 4px rgba(65, 105, 225, 0.85), 0 0 30px 10px rgba(65, 105, 225, 0.6); transform: scale(1.05); }
@@ -485,12 +368,13 @@
       right: 0;
       width: 320px;
       max-width: 90vw;
+      height: 480px;
       background: rgba(37, 48, 105, 0.85);
       backdrop-filter: saturate(180%) blur(10px);
       border-radius: 20px;
       box-shadow: 0 0 35px rgba(65, 105, 225, 0.5);
       color: #f5f1ea;
-      padding: 16px 20px 24px 20px;
+      padding: 16px 20px 20px 20px;
       display: none;
       flex-direction: column;
       opacity: 0;
@@ -523,50 +407,269 @@
       transition: color 0.3s ease;
     }
     #chatbot-close:hover, #chatbot-close:focus { color: #6495ed; outline: none; }
-    .chatbot-content p { margin-bottom: 12px; font-size: 1rem; line-height: 1.4; }
-    .chatbot-content input[type="text"] {
-      width: 100%;
-      padding: 8px 12px;
-      border-radius: 14px;
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .chat-msg {
+      max-width: 80%;
+      padding: 11px 16px;
+      border-radius: 18px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: #d4af37cc;
+      color: #1b244e;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.12);
+      color: #f3e9b7;
+    }
+
+    #chat-input-container {
+      display: flex;
+      gap: 10px;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 24px;
       border: none;
+      background: rgba(255,255,255,0.15);
+      color: #f5f1ea;
       font-family: 'Libre Baskerville', serif;
       font-size: 1rem;
-      margin-bottom: 10px;
-      background: rgba(255, 255, 255 / 0.15);
-      color: #f5f1ea;
-      user-select: text;
     }
-    .chatbot-content input[type="text"]:disabled { opacity: 0.7; cursor: not-allowed; }
-    .chatbot-content button {
+    #chat-input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.22);
+    }
+    #chat-send {
       background: #4169e1cc;
       border: none;
-      border-radius: 20px;
-      padding: 8px 16px;
-      color: #1b244e;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      cursor: not-allowed;
-      opacity: 0.7;
-      user-select: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f1ea;
+      font-size: 1.3rem;
+    }
+    #chat-send:hover {
+      background: #6495ed;
     }
   </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two blue"></div>
+
+  <main class="page-container" role="main" aria-label="UI/UX Makers Landing Page">
+    <!-- Hero Section -->
+    <div class="hero-wrapper fade-in delay-1">
+      <section class="hero-block" tabindex="0" aria-labelledby="hero-title">
+        <video autoplay muted loop playsinline style="max-width: 100%; height: auto; max-height: 280px; border-radius: 20px; object-fit: contain;">
+          <source src="logo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p>A royal elegant digital agency inspired by Japanese artistry and culture.</p>
+      </section>
+    </div>
+
+    <!-- Services -->
+    <div class="services-wrapper">
+    <section class="service-block color1 fade-in delay-2 tilt-3d" tabindex="0" aria-label="Creative Design">
+  <div class="service-block-inner">
+    <div class="icon-container" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M12 19l7-7 3 3-7 7-7-7 3-3 7-7" />
+      </svg>
+    </div>
+    <h3>Creative Design</h3>
+    <p>Innovative concepts blending traditional Japanese minimalism with modern aesthetics.</p>
+    <a href="creative-design.html" target="_blank" rel="noopener noreferrer">View Our Designs</a>
+    <span class="tooltip" role="tooltip">Explore our creative design portfolio & unique projects.</span>
+  </div>
+</section>
+
+
+     <section class="service-block color2 fade-in delay-3 tilt-3d" tabindex="0" aria-label="Precision Engineering">
+  <div class="service-block-inner">
+    <div class="icon-container" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </svg>
+    </div>
+    <h3>Precision Engineering</h3>
+    <p>High-quality digital craftsmanship ensuring flawless performance and user experience.</p>
+    <a href="precision-engineering.html" target="_blank" rel="noopener noreferrer" tabindex="0">See How We Build</a>
+    <span class="tooltip" role="tooltip">Discover how precision elevates our projects to excellence.</span>
+  </div>
+</section>
+
+<section class="service-block color3 fade-in delay-4 tilt-3d" tabindex="0" aria-label="Strategic Consulting">
+  <div class="service-block-inner">
+    <div class="icon-container" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M3 3h18v18H3z" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+    </div>
+    <h3>Strategic Consulting</h3>
+    <p>Better strategies focused on growth, sustainability, and impactful results.</p>
+    <a href="strategic-consulting.html" target="_blank" rel="noopener noreferrer" tabindex="0">Talk to an Expert</a>
+    <span class="tooltip" role="tooltip">Get expert advice customized for your business goals.</span>
+  </div>
+</section>
+    </div>
+  </main>
+
+  <!-- 3D Tilt Script -->
+  <script>
+    document.querySelectorAll('.service-block.tilt-3d').forEach(block => {
+      const inner = block.querySelector('.service-block-inner');
+      const maxTilt = 15;
+
+      function handleMove(e) {
+        const rect = block.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
+        const rotateX = maxTilt * deltaY * -1;
+        const rotateY = maxTilt * deltaX;
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+      }
+
+      function resetTilt() {
+        inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
+      }
+
+      block.addEventListener('mousemove', handleMove);
+      block.addEventListener('mouseleave', resetTilt);
+      block.addEventListener('mouseenter', () => {
+        inner.style.transition = 'transform 0.1s ease-out';
+      });
+    });
+  </script>
+
+  <!-- Dynamic Chatbot -->
+  <div id="chatbot-container" aria-label="Chatbot" role="region" aria-live="polite">
+    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-window" aria-label="Open chatbot">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
+      </svg>
+    </button>
+    <div id="chatbot-window" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+      <header>
+        <h2>Assistant</h2>
+        <button id="chatbot-close" aria-label="Close chatbot">×</button>
+      </header>
+      <div id="chat-messages">
+        <div class="chat-msg bot">Namaste 🙏 Welcome to UI/UX Makers.<br>I am here to guide you with calm and clarity. How may I assist you today?</div>
+      </div>
+      <div id="chat-input-container">
+        <input id="chat-input" type="text" placeholder="Type your message..." aria-label="Type message" />
+        <button id="chat-send" aria-label="Send">➤</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const chatbotClose = document.getElementById('chatbot-close');
+    // Chatbot toggle
+    const toggleBtn = document.getElementById('chatbot-toggle');
+    const chatWindow = document.getElementById('chatbot-window');
+    const closeBtn = document.getElementById('chatbot-close');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    const messagesContainer = document.getElementById('chat-messages');
 
-    chatbotToggle.addEventListener('click', () => {
-      const expanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
-      chatbotToggle.setAttribute('aria-expanded', String(!expanded));
-      chatbotWindow.setAttribute('aria-hidden', String(expanded));
-      if (!expanded) chatbotWindow.focus();
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', !isOpen);
+      chatWindow.setAttribute('aria-hidden', isOpen);
+      if (!isOpen) chatInput.focus();
     });
 
-    chatbotClose.addEventListener('click', () => {
-      chatbotToggle.setAttribute('aria-expanded', 'false');
-      chatbotWindow.setAttribute('aria-hidden', 'true');
-      chatbotToggle.focus();
+    closeBtn.addEventListener('click', () => {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      chatWindow.setAttribute('aria-hidden', 'true');
+    });
+
+    // Add message to chat
+    function addMessage(text, type) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg ${type}`;
+      msgDiv.innerHTML = text;
+      messagesContainer.appendChild(msgDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Bot responses
+    function getBotResponse(userText) {
+      const lower = userText.toLowerCase();
+
+      if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey') || lower.includes('namaste')) {
+        return "Namaste 🙏 It's a pleasure to connect. How can I help you explore our elegant digital craftsmanship today?";
+      }
+      if (lower.includes('service') || lower.includes('offer') || lower.includes('what do you')) {
+        if (lower.includes('design')) return "Our Creative Design blends Japanese minimalism with modern innovation — serene, meaningful, and visually captivating.";
+        if (lower.includes('engineer') || lower.includes('development')) return "Precision Engineering ensures flawless performance, speed, and long-term excellence in every build.";
+        if (lower.includes('consult') || lower.includes('strategy')) return "Strategic Consulting offers calm, thoughtful guidance for growth and digital transformation.";
+        return "We offer: <strong>Creative Design</strong>, <strong>Precision Engineering</strong>, and <strong>Strategic Consulting</strong>.<br>Which one interests you?";
+      }
+      if (lower.includes('price') || lower.includes('cost') || lower.includes('quote') || lower.includes('how much')) {
+        return "Each project is crafted uniquely, like a custom kimono.<br>We tailor pricing to your vision. Share a brief idea, and I’ll guide you toward a quote.";
+      }
+      if (lower.includes('contact') || lower.includes('email') || lower.includes('reach') || lower.includes('talk')) {
+        return "You can reach us at <strong>hello@uiuxmakers.com</strong><br>We respond thoughtfully within 24 hours.";
+      }
+      if (lower.includes('about') || lower.includes('who') || lower.includes('agency')) {
+        return "We are UI/UX Makers — a royal digital agency inspired by Japanese artistry, cinematic calm, and timeless elegance.<br>We craft digital experiences that feel serene yet powerful.";
+      }
+
+      // Calm fallbacks
+      const fallbacks = [
+        "A thoughtful question. Please share more so I may assist with greater clarity.",
+        "Like cherry blossoms in spring, every inquiry has its moment.<br>How else may I guide you?",
+        "Your words carry intention. Tell me more, and I shall respond with care."
+      ];
+      return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    }
+
+    // Send message
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, 'user');
+      chatInput.value = '';
+
+      // Bot replies after a natural pause
+      setTimeout(() => {
+        addMessage(getBotResponse(text), 'bot');
+      }, 800 + Math.random() * 600);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
     });
   </script>
 </body>
