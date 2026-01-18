@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative Design | UI/UX Makers</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Libre+Baskerville&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Libre Baskerville', serif;
+      user-select: none;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: url('precision-engineering_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 30px;
+      color: #ffffff; /* changed to white */
+    }
+
+    /* Fixed hero wrapper top center */
+    .hero-wrapper {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+      pointer-events: none; /* clicks pass through outside text */
+      padding: 0 20px;
+    }
+
+    /* Cinematic intro animation */
+    @keyframes cinematicIntro {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+        letter-spacing: 0.05em;
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+        letter-spacing: 0.12em;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: 0.08em;
+      }
+    }
+
+    /* Text container with animation */
+    .hero-block {
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      opacity: 1;
+      overflow: visible;
+      user-select: text;
+      cursor: default;
+      color: #000000; /* changed to white */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      pointer-events: auto; /* enable interaction inside */
+      text-align: center;
+
+      /* Animate on page load */
+      animation: cinematicIntro 2.5s ease forwards;
+    }
+
+    .hero-block h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      margin: 0;
+      letter-spacing: 0.08em;
+      color: #000000; /* changed to white */
+      user-select: text;
+    }
+
+    .hero-block p {
+      font-size: clamp(1.15rem, 3vw, 1.35rem);
+      color: #000000; /* changed to white */
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0;
+      user-select: text;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .hero-block h1 { font-size: 2.8rem; }
+      .hero-block p { font-size: 1rem; }
+    }
+
+    /* Chatbot styles */
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 6px 2px rgba(65, 105, 225, 0.6), 0 0 15px 5px rgba(65, 105, 225, 0.4); transform: scale(1); }
+      50% { box-shadow: 0 0 12px 4px rgba(65, 105, 225, 0.85), 0 0 30px 10px rgba(65, 105, 225, 0.6); transform: scale(1.05); }
+    }
+    @keyframes slowBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    #chatbot-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      font-family: 'Libre Baskerville', serif;
+      z-index: 10000;
+    }
+    #chatbot-toggle {
+      background: rgba(65, 105, 225, 0.85);
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: glowPulse 3.8s ease-in-out infinite, slowBounce 5s ease-in-out infinite;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 15px rgba(65, 105, 225, 0.6);
+    }
+    #chatbot-toggle:hover, #chatbot-toggle:focus {
+      background: #6495ed;
+      outline: none;
+      box-shadow: 0 0 25px 8px #6495ed;
+      transform: scale(1.12);
+    }
+    #chatbot-window {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 320px;
+      max-width: 90vw;
+      height: 480px;
+      background: rgba(37, 48, 105, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(65, 105, 225, 0.5);
+      color: #f5f1ea;
+      padding: 16px 20px 20px 20px;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    #chatbot-window[aria-hidden="false"] {
+      display: flex;
+      opacity: 1;
+    }
+    #chatbot-window header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    #chatbot-window header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #4169e1;
+      margin: 0;
+    }
+    #chatbot-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #4169e1;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+    #chatbot-close:hover, #chatbot-close:focus { color: #6495ed; outline: none; }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .chat-msg {
+      max-width: 80%;
+      padding: 11px 16px;
+      border-radius: 18px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: #d4af37cc;
+      color: #1b244e;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.12);
+      color: #f3e9b7;
+    }
+
+    #chat-input-container {
+      display: flex;
+      gap: 10px;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: #f5f1ea;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+    }
+    #chat-input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.22);
+    }
+    #chat-send {
+      background: #4169e1cc;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f1ea;
+      font-size: 1.3rem;
+    }
+    #chat-send:hover {
+      background: #6495ed;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-wrapper">
+    <section class="hero-block" tabindex="0" aria-labelledby="creative-title">
+      <p>🚧This website is under construction🚧</p>
+    </section>
+  </div>
+
+  <!-- Chatbot container -->
+  <div id="chatbot-container" aria-label="Chatbot" role="region" aria-live="polite">
+    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-window" aria-label="Open chatbot">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
+      </svg>
+    </button>
+    <div id="chatbot-window" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+      <header>
+        <h2>Assistant</h2>
+        <button id="chatbot-close" aria-label="Close chatbot">×</button>
+      </header>
+      <div id="chat-messages">
+        <div class="chat-msg bot">Namaste 🙏 You're exploring our Creative Design portfolio.<br>How may I guide you through our visual stories?</div>
+      </div>
+      <div id="chat-input-container">
+        <input id="chat-input" type="text" placeholder="Type your message..." aria-label="Type message" />
+        <button id="chat-send" aria-label="Send">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Chatbot functionality
+    const toggleBtn = document.getElementById('chatbot-toggle');
+    const chatWindow = document.getElementById('chatbot-window');
+    const closeBtn = document.getElementById('chatbot-close');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    const messagesContainer = document.getElementById('chat-messages');
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', !isOpen);
+      chatWindow.setAttribute('aria-hidden', isOpen);
+      if (!isOpen) chatInput.focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      chatWindow.setAttribute('aria-hidden', 'true');
+    });
+
+    function addMessage(text, type) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg ${type}`;
+      msgDiv.innerHTML = text;
+      messagesContainer.appendChild(msgDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function getBotResponse(userText) {
+      const lower = userText.toLowerCase();
+      if (lower.includes('hello') || lower.includes('hi') || lower.includes('namaste')) {
+        return "Namaste 🙏 Beautiful choice exploring our designs.<br>What kind of aesthetic speaks to you most?";
+      }
+      if (lower.includes('portfolio') || lower.includes('project') || lower.includes('work')) {
+        return "Each piece here is inspired by wabi-sabi, minimalism, and mindful interaction.<br>Which project caught your eye?";
+      }
+      if (lower.includes('design') || lower.includes('style')) {
+        return "Our style draws from Japanese principles: space, silence, imperfection as beauty, and intentional restraint.";
+      }
+      const fallbacks = [
+        "Your curiosity is appreciated. How else may I illuminate our creative journey?",
+        "Like a tea ceremony, design is about presence.<br>Tell me more about your vision.",
+        "Every detail matters. Please share your thoughts, and I shall respond with care."
+      ];
+      return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    }
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      setTimeout(() => {
+        addMessage(getBotResponse(text), 'bot');
+      }, 800 + Math.random() * 600);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
